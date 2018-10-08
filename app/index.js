@@ -20,8 +20,7 @@ app.get('/public', (req, res) =>
 )
 
 app.get('/protected', jwt(jwtProps), (req, res) => {
-    // TODO Validate the access token.
-    res.send("This is a protected endpoint")
+    res.json({userId: req.user.userId})
 })
 
 app.post('/authenticate', (req, res) => {
