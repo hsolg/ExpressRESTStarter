@@ -1,0 +1,13 @@
+{
+  "name": "useradmin",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "bcrypt": "^3.0.1",
+    "bluebird": "^3.5.2",
+    "commander": "^2.18.0",
+    "sqlite": "^3.0.0"
+  }
+}
