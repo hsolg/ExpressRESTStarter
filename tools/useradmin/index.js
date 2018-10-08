@@ -3,8 +3,10 @@ const bcrypt = require('bcrypt')
 const Promise = require('bluebird')
 const sqlite = require('sqlite')
 
+const dbPath = process.env.DB_PATH || "../../starter.db"
+
 async function dbOperation(operation) {
-    const dbPromise = sqlite.open('../../starter.db', { Promise })
+    const dbPromise = sqlite.open(dbPath, { Promise })
     const db = await dbPromise
     return operation(db).then(() => {
         db.close()
