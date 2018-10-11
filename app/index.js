@@ -31,19 +31,25 @@ app.post('/authenticate', (req, res) => {
     const password = req.body.password
 
     sqlite.open(dbPath, { Promise }).then((db) => {
-        db.get("SELECT user_id, password FROM user WHERE username = ?", [username]).then((row) => {
-            new Promise(resolve => {
-                bcrypt.compare(password, row.password, (err, res) => {
-                    resolve(res)
+        db.get("SELECT user_id, password FROM user WHERE username = ?", username).then((row) => {
+            if (row) {
+                new Promise(resolve => {
+                    bcrypt.compare(password, row.password, (err, res) => {
+                        resolve(res)
+                    })
+                }).then(match => {
+                    if (match) {
+                        const token = jsonwebtoken.sign({userId: row.user_id, username: username}, jwtSecret)
+                        res.json({token: token})
+                    } else {
+                        // Wrong password
+                        res.sendStatus(401)
+                    }
                 })
-            }).then(match => {
-                if (match) {
-                    const token = jsonwebtoken.sign({userId: row.user_id, username: username}, jwtSecret)
-                    res.json({token: token})
-                } else {
-                    res.sendStatus(401)
-                }
-            })
+            } else {
+                // Uknknown user
+                res.status(401).send()
+            }
         })
     })
 })
