@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const bcrypt = require('bcrypt')
 const jwt = require('express-jwt')
 const jsonwebtoken = require('jsonwebtoken')
@@ -11,7 +12,9 @@ const jwtSecret = process.env.JWT_SECRET || "default_secret"
 const dbPath = process.env.DB_PATH || "../starter.db"
 
 const app = express()
+
 app.use(bodyParser.json())
+app.use(cors())
 
 const jwtProps = { secret: jwtSecret }
 
