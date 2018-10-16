@@ -14,7 +14,7 @@ const dbPath = process.env.DB_PATH || "../starter.db"
 const app = express()
 
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({optionsSuccessStatus: 200}))
 
 const jwtProps = { secret: jwtSecret }
 
