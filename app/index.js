@@ -47,7 +47,7 @@ app.post('/authenticate', (req, res) => {
                     }
                 })
             } else {
-                // Uknknown user
+                // Unknown user
                 res.status(401).send()
             }
         })
