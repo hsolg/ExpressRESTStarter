@@ -6,6 +6,9 @@
   "repository": "https://github.com/hsolg/ExpressRESTStarter.git",
   "author": "Henrik Solgaard <h@solg.no>",
   "license": "GPL-3.0",
+  "scripts": {
+      "package": "./package.sh"
+  },
   "dependencies": {
     "bcrypt": "^3.0.1",
     "bluebird": "^3.5.2",
